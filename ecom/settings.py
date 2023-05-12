@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     
     'authentication',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #add custom user model
 AUTH_USER_MODEL = 'authentication.User'
+
+#root for media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
