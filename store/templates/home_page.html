@@ -7,7 +7,19 @@
 
 {% block content %}
 
-    <div class="container mt-5">
+    <div class="container mt-3">
+
+        <div class="d-flex justify-content-center pt-3 mb-4">
+            {% for category in categories %}
+              <a 
+              href="{% url 'category' category.slug %}" 
+              class="link-dark text-decoration-none text-capitalize px-3"
+              >
+                {{ category.name }}
+              </a>
+            {% endfor %}
+        </div>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
         {% for product in products %}
             <div class="col">
@@ -17,9 +29,11 @@
                     {% endif %}
                     <div class="card-body">
                         <div>
-                            <span class="border border-warning text-warning rounded-pill px-2">
+                            <a 
+                            href="{% url 'category' product.category.slug %}" 
+                            class="border border-warning text-warning text-decoration-none rounded-pill px-2">
                                 {{ product.category.name }}
-                            </span>
+                            </a>
                         </div>
                         <div class="mt-2 mb-3">
                             <h5 class="card-title fw-bold">
