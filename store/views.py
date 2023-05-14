@@ -44,5 +44,16 @@ class category_page(View):
         }
         
         return render(self.request, self.template, context=context)
+    
+class product_page(View):
+    product_model = Product
+    category_model = Category
+    template = 'product_page.html'
+    
+    def get(self, *args, **kwargs):
+        category = get_object_or_404(self.category_model, slug=kwargs['category'])
+        product = get_object_or_404(self.product_model, category=category, slug=kwargs['product'])
+        
+        return render(self.request, self.template, {'product' : product})
 
 
