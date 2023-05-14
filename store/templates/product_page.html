@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ product.name }}
+{% endblock title %}
+
+
+{% block content %}
+
+
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div>
+                    {% if product.image %}
+                    <img 
+                    src="{{ product.image.url }}" 
+                    alt="{{ product.name }}" 
+                    class=""
+                    style="max-height: 350px; width: 100%;">
+                {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <div>
+                    <a 
+                    href="{% url 'category' product.category.slug %}" 
+                    class="border border-warning text-warning text-decoration-none rounded-pill px-2">
+                        {{ product.category.name }}
+                    </a>
+                </div>
+                <h1 class="fw-bold">
+                    {{ product.name }}
+                </h1>
+                <h3 class="text-success">
+                   $ {{ product.price }}
+                </h3>
+
+                <p class="mb-3">
+                    {{ product.description }}
+                </p>
+
+                <button type="button" class="btn btn-primary">
+                    Add to cart 
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
