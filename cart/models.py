@@ -11,7 +11,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"Cart {self.pk}"
+        return f"{self.user.username.capitalize()} Cart "
     
     
 class CartItem(models.Model):
@@ -20,4 +20,9 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     
     def __str__(self):
-        return f"CartItem {self.pk} - {self.product}"
+        return f"{self.cart} - {self.product}"
+    
+    def get_total_price(self):
+        total = self.product.price * self.quantity
+        
+        return total

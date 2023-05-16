@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{cart}}
+{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h3 class="border-bottom fw-bold pb-2 mb-3">
+            {{cart}}
+        </h1>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product details</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total price</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                {% for item in items %}
+                  <tr>
+                    <td>
+                        <div class="d-flex">
+                            <div>
+                                {% if item.product.image %}
+                                    <a href="{% url 'product' item.product.category.slug item.product.slug %}">
+                                        <img src="{{item.product.image.url}}" alt="" style="height: 50px; width: auto; margin-right: 5px;">
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                {{ item.product.name }}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+                    <td>
+                        ${{ item.product.price }}
+                    </td>
+                    <td>
+                        ${{item.get_total_price}}
+                    </td>
+                  </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+
+{% endblock content %}
