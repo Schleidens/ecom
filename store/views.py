@@ -7,6 +7,8 @@ from .models import (
     Category
 )
 
+from .forms import Quantity
+
 
 # Create your views here.
 
@@ -48,12 +50,20 @@ class category_page(View):
 class product_page(View):
     product_model = Product
     category_model = Category
+    form = Quantity
     template = 'product_page.html'
     
     def get(self, *args, **kwargs):
         category = get_object_or_404(self.category_model, slug=kwargs['category'])
         product = get_object_or_404(self.product_model, category=category, slug=kwargs['product'])
         
-        return render(self.request, self.template, {'product' : product})
+        form = self.form()
+        
+        context = {
+            'product' : product,
+            'form' : form
+        }
+        
+        return render(self.request, self.template, context=context)
 
 
