@@ -13,10 +13,10 @@
             {{cart}}
         </h1>
 
-        <table class="table">
+        <table class="table text-center">
             <thead>
               <tr>
-                <th scope="col">Product details</th>
+                <th scope="col" class="text-start">Product details</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Total price</th>
@@ -28,7 +28,7 @@
                   <tr>
                     <td>
                         <div class="d-flex">
-                            <div>
+                            <div class="d-none d-sm-block">
                                 {% if item.product.image %}
                                     <a href="{% url 'product' item.product.category.slug item.product.slug %}">
                                         <img src="{{item.product.image.url}}" alt="" style="height: 50px; width: auto; margin-right: 5px;">
@@ -54,6 +54,9 @@
               
             </tbody>
           </table>
+          <div class="text-end fw-bold px-5">
+            Subtotal : ${{cart_total_price}}
+          </div>
     </div>
 
 {% endblock content %}
