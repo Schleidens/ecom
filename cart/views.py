@@ -64,9 +64,21 @@ class cart_view(LoginRequiredMixin, View):
         #get the items in cart
         cart_items = self.cart_item_model.objects.filter(cart=cart)
         
+        #initialize total price
+        cart_total_price = 0
+        
+        #calculate total price for all cart_items
+        for item in cart_items:
+            price = item.product.price
+            quantity = item.quantity
+            
+            #assign the final price
+            cart_total_price += price * quantity
+        
         context = {
             'items' : cart_items,
-            'cart' : cart
+            'cart' : cart,
+            'cart_total_price' : cart_total_price
         }
         
         return render(request, self.template, context=context)
