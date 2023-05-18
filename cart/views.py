@@ -48,6 +48,20 @@ def add_to_cart(request, product_id):
     
     return redirect(request.path)
 
+#remove item from cart FBV
+def remove_from_cart(request, cart_item_id):
+    
+    if request.method == 'POST':
+            
+        #get the cart item by passing the cart_item_id from the dynamic link
+        cart_item = get_object_or_404(CartItem, id=cart_item_id)
+
+        if cart_item:
+            cart_item.delete()
+            
+            return redirect('cart')
+        
+        return redirect('home-page')
 
 
 #Cart view

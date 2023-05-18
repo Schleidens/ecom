@@ -49,13 +49,28 @@
                     <td>
                         ${{item.get_total_price}}
                     </td>
+                    <td>
+                        <form class="row g-2" action="{% url 'remove-from-cart' item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger badge rounded-pill text-bg-danger">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
                   </tr>
                 {% endfor %}
               
             </tbody>
+            <tfoot class="text-end">
+                <tr>
+                    <td colspan="5">
+                        Subtotal : ${{cart_total_price}}
+                    </td>
+                </tr>
+            </tfoot>
           </table>
           <div class="text-end fw-bold px-5">
-            Subtotal : ${{cart_total_price}}
+            
           </div>
     </div>
 
