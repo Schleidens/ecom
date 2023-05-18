@@ -49,6 +49,7 @@ def add_to_cart(request, product_id):
     return redirect(request.path)
 
 #remove item from cart FBV
+@login_required
 def remove_from_cart(request, cart_item_id):
     
     if request.method == 'POST':
