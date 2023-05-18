@@ -15,7 +15,7 @@
     <!-- navbar start  -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="{% url 'home-page' %}">
                 E-com
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +25,7 @@
           <div class="collapse navbar-collapse" id="navbarsExample04">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a class="nav-link" aria-current="page" href="{% url 'home-page' %}">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
@@ -43,7 +37,7 @@
               </li>
             </ul>
             <div class="cart">
-                <a href="#" class="text-light fs-4">
+                <a href="{% url 'cart' %}" class="text-light fs-4">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 </a>
             </div>
@@ -62,16 +56,18 @@
       <!-- here's the footer -->
       <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-          <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Company, Inc</p>
+          <p class="col-md-4 mb-0 text-body-secondary">build with &hearts; by 
+            <a href="https://schleidens.netlify.app/" target="_blank" rel="noopener noreferrer">
+              Schleidens.dev
+            </a>
+          </p>
       
           <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           </a>
       
           <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="{% url 'home-page' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
           </ul>
