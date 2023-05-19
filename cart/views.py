@@ -145,8 +145,39 @@ def handle_payment(request):
             #delete all items in cart once payment done
             cart_items.delete()
             
-            return redirect('cart')
+            return redirect('payment-success')
         except stripe.error.CardError as e:
             error_message = e.error.message
             
-            return redirect('home-page')
+            return redirect('payment-fail')
+        
+#view for redirect when payment is done
+class payment_success(LoginRequiredMixin, View):
+    template = 'payment_redirect.html'
+    
+    def get(self, request):
+        
+        context = {
+            'type' : 'success',
+            'header' : 'Thank You for Your Payment!',
+            'text' : 'Your transaction has been successfully processed, and we greatly appreciate your business. Your order has been received and is being prepared for shipment.',
+            'footer' : 'Once again, thank you for choosing our services. We hope you enjoy your purchase!'
+        }
+        
+        return render(request, self.template, context=context)
+    
+
+#view for redirect when payment fail
+class payment_fail(LoginRequiredMixin, View):
+    template = 'payment_redirect.html'
+    
+    def get(self, request):
+        
+        context = {
+            'type' : 'warning',
+            'header' : 'Payment Processing Error (:',
+            'text' : 'We apologize for the inconvenience, but there was an error processing your payment. Please ensure that the payment details provided are correct and try again.',
+            'footer' : 'We appreciate your patience and understanding. Please accept our apologies for any inconvenience caused.'
+        }
+        
+        return render(request, self.template, context=context)

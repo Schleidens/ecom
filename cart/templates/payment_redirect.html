@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+    payment Done
+
+{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container mt-5 py-5">
+        <div class="alert alert-{{type}}" role="alert">
+            <h4 class="alert-heading">
+                {{ header }}
+            </h4>
+            <p>
+                {{ text }}
+            </p>
+            <hr>
+            <p class="mb-0">
+                {{ footer }}
+            </p>
+            <a href="{% url 'home-page' %}">
+            Back to home page
+            </a>
+          </div>
+    </div>
+
+{% endblock content %}
