@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,4 +137,9 @@ AUTH_USER_MODEL = 'authentication.User'
 #root for media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
+#Stripe API keys
+STRIPE_PUBLISHABLE_KEY= config('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY= config('STRIPE_SECRET_KEY')
+
 
