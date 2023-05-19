@@ -13,6 +13,8 @@
             {{cart}}
         </h1>
 
+        {% if items %}
+        
         <table class="table text-center">
             <thead>
               <tr>
@@ -70,8 +72,34 @@
             </tfoot>
           </table>
           <div class="text-end fw-bold px-5">
-            
+            <form action="{% url 'handle-payment' %}" method="post">
+                {% csrf_token %}
+                <script src="https://checkout.stripe.com/checkout.js" 
+                        class="stripe-button"
+                        data-key="{{ STRIPE_PUBLISHABLE_KEY }}"
+                        data-amount="{{ stripe_price }}"
+                        data-name="E-com"
+                        data-description="Payment"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        data-currency="usd"
+                        data-email="{{ request.user.name }}">
+                </script>
+              </form>
           </div>
+
+        {% else %}
+        
+            <div class="d-flex flex-column justify-content-center align-items-center py-5">
+                <h2 class="text-body-secondary">
+                    your cart is empty
+                </h2>
+                <p>Start adding items to your cart to proceed.</p>
+                <a href="{% url 'home-page' %}">Go to products</a>
+            </div>  
+
+        {% endif %}
+
+        
     </div>
 
 {% endblock content %}
