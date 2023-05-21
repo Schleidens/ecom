@@ -8,6 +8,7 @@ from django.views.generic import View
 
 from .models import Cart, CartItem
 from store.models import Product
+from summary.models import Summary
 
 from store.forms import Quantity
 
@@ -141,6 +142,9 @@ def handle_payment(request):
                 currency = 'usd',
                 source = token
             )
+            
+            #create a order history with the money spent for order history
+            Summary.objects.create(customer=request.user, amount=cart_total_price)
             
             #delete all items in cart once payment done
             cart_items.delete()
