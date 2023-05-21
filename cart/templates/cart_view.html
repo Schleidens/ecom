@@ -71,7 +71,7 @@
                 </tr>
             </tfoot>
           </table>
-          <div class="text-end fw-bold px-5">
+          <div class="text-end fw-bold px-2">
             <form action="{% url 'handle-payment' %}" method="post">
                 {% csrf_token %}
                 <script src="https://checkout.stripe.com/checkout.js" 
