@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Order history
+{% endblock title %}
+
+{% block content %}
+
+    
+    {% if orders %}
+    <div class="container mt-5 py-2">
+        <div class="mb-3">
+            <h2 class="fw-bold">
+                {{request.user.username}} order history
+            </h2>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Amount spent</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                 
+                    <tr>
+                        <td>
+                            {{order.customer.username}}
+                        </td>
+                        <td>
+                            ${{order.amount}}
+                        </td>
+                        <td> {{order.date}} </td>
+                    </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+    {% else %}
+    <div class="d-flex flex-column justify-content-center align-items-center mt-5 py-5">
+        <h2 class="text-body-secondary">
+            you haven't buy any product yet
+        </h2>
+        <a href="{% url 'home-page' %}">Go to products</a>
+    </div>
+    {% endif %}
+    
+
+
+{% endblock content %}
