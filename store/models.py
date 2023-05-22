@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from django.utils.text import slugify
 
@@ -30,6 +31,16 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+        
+
+#model for wishlist
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.user.username} wishlist, item : {self.product.name}"
+    
 
     
     
