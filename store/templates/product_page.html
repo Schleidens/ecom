@@ -23,7 +23,7 @@
                 {% endif %}
                 </div>
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-12">
+            <div class="col-lg-5 col-md-5 col-sm-12 mt-3 mt-md-0">
                 <div>
                     <a 
                     href="{% url 'category' product.category.slug %}" 
@@ -33,7 +33,34 @@
                 </div>
                 <h1 class="fw-bold">
                     {{ product.name }}
-                </h1>
+                </h1>           
+
+                <!-- conditional form to add or remove form to wishlist -->
+                {% if is_in_wishlist %}
+                    <div class="mb-1">
+                        <form method="post" action="{% url 'request-wishlist' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="action" value="remove">
+                            <button type="submit" style="border: none; outline: none; background: none;">
+                                <i class="fa fa-heart fs-3 text-warning" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="mb-1">
+                        <form method="post" action="{% url 'request-wishlist' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="action" value="add">
+                            <button type="submit" style="border: none; outline: none; background: none; padding: 0;">
+                                <i class="fa fa-heart-o fs-3 text-warning" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+                <!-- end of the form -->
+
                 <h3 class="text-success">
                    $ {{ product.price }}
                 </h3>
