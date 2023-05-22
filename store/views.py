@@ -94,8 +94,8 @@ def request_wishlist(request):
                 this_wishlist_item = get_object_or_404(Wishlist, user=request.user, product=product)
                 this_wishlist_item.delete()
             
-            return redirect('home-page')
-        return redirect('home-page')
+            return redirect('wishlist')
+        return redirect('wishlist')
     
     
 class wishlist_page(LoginRequiredMixin, View):
