@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import View
 
@@ -70,6 +72,7 @@ class product_page(View):
         return render(self.request, self.template, context=context)
 
 #view to handle the add or remove to wishlist request FBV 
+@login_required
 def request_wishlist(request):
     
     if request.method == 'POST':
@@ -93,3 +96,13 @@ def request_wishlist(request):
             
             return redirect('home-page')
         return redirect('home-page')
+    
+    
+class wishlist_page(LoginRequiredMixin, View):
+    model = Wishlist
+    template = 'wishlist_page.html'
+    
+    def get(self, request):
+        wishlist_item = self.model.objects.filter(user=request.user)
+        
+        return render(request, self.template, {'items' : wishlist_item})
