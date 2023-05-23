@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import View
 
+from django.contrib.auth.views import LogoutView
+from django.urls import reverse_lazy
+
 from django.contrib.auth import login, authenticate
 
 from .forms import createUserForm, loginUserForm
@@ -71,3 +74,9 @@ class user_login_view(View):
             'message' : message
         }
         return render(request, self.template, context=context)
+    
+    
+    
+# logout view CBVs
+class user_logout_view(LogoutView):
+    next_page = reverse_lazy('home-page')
