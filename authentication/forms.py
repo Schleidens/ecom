@@ -38,3 +38,17 @@ class createUserForm(UserCreationForm):
                 'class' : 'form-control'
             })
         }
+        
+#form for login user view
+class loginUserForm(forms.Form):
+    username = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label='Username'
+        )
+    
+    password =  forms.CharField(
+        max_length=30,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label='Password'
+        )
