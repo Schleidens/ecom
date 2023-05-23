@@ -82,31 +82,41 @@ class cart_view(LoginRequiredMixin, View):
     
     def get(self, request):
         
-        #get the cart
-        cart =  get_object_or_404(self.cart_model, user=request.user)
+        cart_exist = self.cart_model.objects.filter(user=request.user).exists()
         
-        #get the items in cart
-        cart_items = self.cart_item_model.objects.filter(cart=cart)
+        if cart_exist:
         
-        #initialize total price
-        cart_total_price = 0
-        
-        #calculate total price for all cart_items
-        for item in cart_items:
-            price = item.product.price
-            quantity = item.quantity
+            #get the cart
+            cart =  get_object_or_404(self.cart_model, user=request.user)
             
-            #assign the final price
-            cart_total_price += price * quantity
+            #get the items in cart
+            cart_items = self.cart_item_model.objects.filter(cart=cart)
             
+            #initialize total price
+            cart_total_price = 0
+            
+            #calculate total price for all cart_items
+            for item in cart_items:
+                price = item.product.price
+                quantity = item.quantity
+                
+                #assign the final price
+                cart_total_price += price * quantity
+                
+            
+            context = {
+                'items' : cart_items,
+                'cart' : cart,
+                'cart_total_price' : cart_total_price,
+                'STRIPE_PUBLISHABLE_KEY' : settings.STRIPE_PUBLISHABLE_KEY,
+                'stripe_price' : int(Decimal(cart_total_price) * 100)
+            }
         
-        context = {
-            'items' : cart_items,
-            'cart' : cart,
-            'cart_total_price' : cart_total_price,
-            'STRIPE_PUBLISHABLE_KEY' : settings.STRIPE_PUBLISHABLE_KEY,
-            'stripe_price' : int(Decimal(cart_total_price) * 100)
-        }
+        else:
+            context = {
+                'cart' : f'{request.user.username} cart',
+                'items' : False
+            }
         
         return render(request, self.template, context=context)
     
