@@ -59,7 +59,13 @@ class product_page(View):
     def get(self, *args, **kwargs):
         category = get_object_or_404(self.category_model, slug=kwargs['category'])
         product = get_object_or_404(self.product_model, category=category, slug=kwargs['product'])
-        wishlist = Wishlist.objects.filter(user=self.request.user, product=product).exists()
+        
+        if self.request.user.is_authenticated:
+            wishlist = Wishlist.objects.filter(user=self.request.user, product=product).exists()
+        else:
+            wishlist  = False
+            
+        
         
         form = self.form()
         
