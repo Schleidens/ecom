@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" class="h-75">
+    {% csrf_token %}
+
+    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+
+        <div class="mb-3 mt-5 pt-5">
+            <h1 class="fw-bold mt-5">
+                Signup
+            </h1>
+        </div>
+    
+        <div class="row w-50">
+            <div class="col-lg-6 col-md-6 col-12 mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                     {{ form.first_name.label}} 
+                </label>
+                {{ form.first_name }}
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-12 mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                     {{ form.last_name.label}} 
+                </label>
+                {{ form.last_name }}
+              </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                     {{ form.username.label}} 
+                </label>
+                {{ form.username }}
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                     {{ form.email.label}} 
+                </label>
+                {{ form.email }}
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">
+                     {{ form.password1.label }} 
+                </label>
+                {{ form.password1 }}
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">
+                     {{ form.password2.label }} 
+                </label>
+                {{ form.password2 }}
+              </div>
+
+              {% for error in form.errors %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% if error == 'username' %}
+                  That username is already taken. Please choose a different username.
+                {% elif error == 'password2' %}
+                  Password must be at least 8 characters and contain at least one letter and one number.
+                {% else %}
+                  Something's went wrong
+                {% endif %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+              
+              <div class="mb-3">
+                <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
+              </div>
+
+              <div class="form-text text-center" id="basic-addon4">
+                Have an account? <a href="">Login</a>
+                    <br />
+                <a href="#">Reset password</a>
+              </div>
+        </div>
+        
+
+    </div>
+
+</form>
+
+{% endblock content %}

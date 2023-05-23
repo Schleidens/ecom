@@ -143,4 +143,10 @@ MEDIA_ROOT = BASE_DIR.joinpath('media/')
 STRIPE_PUBLISHABLE_KEY= config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY= config('STRIPE_SECRET_KEY')
 
+#redirect page for guest users
+LOGIN_URL = 'login'
+
+#set redirect page for authenticated user
+LOGIN_REDIRECT_URL = 'home-page'
+
 

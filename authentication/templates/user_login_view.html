@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Login
+
+{% endblock title %}
+
+{% block content %}
+
+    <form method="post" class="h-75">
+        {% csrf_token %}
+
+        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+
+            <div class="mb-5">
+                <h1 class="fw-bold">
+                    Login
+                </h1>
+            </div>
+        
+            <div class="">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">
+                         {{ form.username.label}} 
+                    </label>
+                    {{ form.username }}
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">
+                         {{ form.password.label }} 
+                    </label>
+                    {{ form.password }}
+                  </div>
+
+                  {% if message %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  {% endif %}
+                  
+
+                  <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
+
+                  <div class="form-text text-center" id="basic-addon4">
+                    Have an account? <a href="{% url 'register' %}">Signup</a>
+                  </div>
+            </div>
+            
+    
+        </div>
+
+    </form>
+
+{% endblock content %}
